@@ -99,6 +99,24 @@ int main() {
         assert(analysis_language(request, filename) == "C++");
         assert(code_analysis(request) == false);
 	}
+	{
+		//Test case: given_filename
+		//The given_filename is the name of the file on the disk. For a source-code archive the entry_filename is used instead.		
+        analysis_request request;
+        request.given_filename  = "test.cpp";
+        request.entry_filename  = "tester.aj";
+        request.given_url       = "";
+        request.option_filename = "";
+        request.option_url      = "";
+        request.option_language = "";
+		
+        auto filename = analysis_filename(request);
+        assert(filename == "tester.aj");
+        assert(analysis_url(request) == "");
+        assert(analysis_language(request, filename) == "AspectJ");
+        assert(code_analysis(request) == false); 
+		
+	}
 
     return 0;
 }
