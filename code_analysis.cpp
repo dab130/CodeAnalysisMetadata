@@ -28,11 +28,11 @@ bool code_analysis(const analysis_request& request) {
 			std::cerr << "Extension not supported " << std:: endl;
 			return false;
 		}
-		if(request.entry_filename != "" && language == ""){
+	if(request.entry_filename != "" && language == ""){
 			std::cerr << "Extension not supported " << std:: endl;
 			return false;
 		}
-		if(request.option_filename != "" && language == ""){
+	if(request.option_filename != "" && language == ""){
 			std::cerr << "Using stdin requires a declared language" << std::endl;
 			return false;
 		}	
