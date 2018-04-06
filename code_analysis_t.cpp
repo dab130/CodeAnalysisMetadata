@@ -172,6 +172,24 @@ int main() {
         assert(code_analysis(request) == false);
 		
 	}
+	{
+		//Test case:  If the option_filename is blank (i.e., “”), then the resulting filename is blank,
+		//and the language is based on the option_language.
+        analysis_request request;
+        request.given_filename  = "testing.aj";
+        request.entry_filename  = "test.java";
+        request.given_url       = "";
+        request.option_filename = "";
+        request.option_url      = "";
+        request.option_language = "C++";
+		
+        auto filename = analysis_filename(request);
+        assert(filename == "");
+        assert(analysis_url(request) == "");
+        assert(analysis_language(request, filename) == "C++");
+        assert(code_analysis(request) == false);
+		
+	}
 
     return 0;
 }
