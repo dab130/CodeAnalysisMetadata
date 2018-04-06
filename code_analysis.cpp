@@ -32,7 +32,20 @@ bool code_analysis(const analysis_request& request) {
  * @retval filename
  */
 std::string analysis_filename(const analysis_request& request) {
-
+	if(request.option_filename != ""){
+		return request.option_filename; 				// if there is a stdin value return it.
+		
+	}else if(request.entry_filename == "data"){
+		return request.given_filename; 					// this will return a file on the disk. 
+														// if there isn't a stdin value and the data is not source code
+	}else if(request.entry_filename != "" && request.option_language == ""){
+		return request.entry_filename; 
+														//if there isn't a stdin value and the data is source code		
+	}else if(request.given_filename != "" && request.option_language == ""){
+		return request.given_filename; 				
+		
+	}								   
+	return "";
     return "";
 }
 
