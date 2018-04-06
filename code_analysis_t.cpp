@@ -46,6 +46,24 @@ int main() {
         assert(code_analysis(request) == false);
 		
 	}
+	{	
+		// Test case: analysis_url
+		// The url is the given_url for a directory and a URL. There is an option_url, which takes precedence.
+		//This will return www.google.com over www.github.com
+		analysis_request request;
+		request.given_filename  = "";
+        request.entry_filename  = "";
+        request.given_url       = "www.github.com";
+        request.option_filename = "";
+        request.option_url      = "www.google.com";
+        request.option_language = "";
+		
+		auto filename = analysis_filename(request);
+		assert(filename == "");
+        assert(analysis_url(request) == "www.google.com");
+        assert(analysis_language(request, filename) == "");
+        assert(code_analysis(request) == false);
+	}
 
     return 0;
 }
