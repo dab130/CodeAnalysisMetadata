@@ -208,6 +208,24 @@ int main() {
         assert(code_analysis(request) == false);
 		
 	}
+	{
+		//Test case: Error handling If the file extension is used to determine the language, 
+		//and there is no mapping for that language, output the error message “Extension not supported”		
+        analysis_request request;
+        request.given_filename  = "test.cpsdf";
+        request.entry_filename  = "";
+        request.given_url       = "";
+        request.option_filename = "";
+        request.option_url      = "";
+        request.option_language = "";
+		
+        auto filename = analysis_filename(request);
+        assert(filename == "test.cpsdf");
+        assert(analysis_url(request) == "");
+        assert(analysis_language(request, filename) == "");
+        assert(code_analysis(request) == false);
+		
+	}
 
     return 0;
 }
