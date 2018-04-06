@@ -153,6 +153,25 @@ int main() {
         assert(code_analysis(request) == false);
 		
 	}
+	{
+		//Test case: given_filename with a dash as a non source code archive.
+		//Note that the entry_filename is not valid (i.e, “data”) for a non source code archive,
+		//and the option_filename must be used. 
+        analysis_request request;
+        request.given_filename  = "-";
+        request.entry_filename  = "data";
+        request.given_url       = "";
+        request.option_filename = "testing.cpp";
+        request.option_url      = "";
+        request.option_language = "";
+		
+        auto filename = analysis_filename(request);
+        assert(filename == "testing.cpp");
+        assert(analysis_url(request) == "");
+        assert(analysis_language(request, filename) == "C++");
+        assert(code_analysis(request) == false);
+		
+	}
 
     return 0;
 }
