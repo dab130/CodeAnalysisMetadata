@@ -42,7 +42,7 @@ int main() {
         auto filename = analysis_filename(request);
         assert(filename == "test.cpp");
         assert(analysis_url(request) == "");
-        assert(analysis_language(request, filename) == "C++");
+        assert(analysis_language(request, filename) == "");
         assert(code_analysis(request) == false);
 		
 	}
