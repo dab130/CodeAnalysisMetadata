@@ -117,6 +117,24 @@ int main() {
         assert(code_analysis(request) == false); 
 		
 	}
+	{
+		//Test case: entry_filename
+		//For a regular file the entry_filename is the literal string “data”, and you should use the given_filename
+        analysis_request request;
+        request.given_filename  = "test.cpp";
+        request.entry_filename  = "data";
+        request.given_url       = "";
+        request.option_filename = "";
+        request.option_url      = "";
+        request.option_language = "";
+		
+        auto filename = analysis_filename(request);
+        assert(filename == "test.cpp");
+        assert(analysis_url(request) == "");
+        assert(analysis_language(request, filename) == "C++");
+        assert(code_analysis(request) == false);
+		
+	}
 
     return 0;
 }
