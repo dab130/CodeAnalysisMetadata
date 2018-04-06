@@ -8,6 +8,7 @@
 #include "get_language_from_filename.hpp"
 
 #include <string>
+#include <iostream>
 
 /** Generate source analysis based on the request
  * @param request Data that forms the request
@@ -23,6 +24,18 @@ bool code_analysis(const analysis_request& request) {
     auto language = analysis_language(request, filename);
 
     // code analysis processing that is not yet implemented
+	if(request.given_filename != "" && language == ""){
+			std::cerr << "Extension not supported " << std:: endl;
+			return false;
+		}
+		if(request.entry_filename != "" && language == ""){
+			std::cerr << "Extension not supported " << std:: endl;
+			return false;
+		}
+		if(request.option_filename != "" && language == ""){
+			std::cerr << "Using stdin requires a declared language" << std::endl;
+			return false;
+		}	
 
     return false;
 }
