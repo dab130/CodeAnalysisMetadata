@@ -64,6 +64,23 @@ int main() {
         assert(analysis_language(request, filename) == "");
         assert(code_analysis(request) == false);
 	}
+	{
+		// Test case: analysis_language
+		// The language can be explicitly given as an option (option_language) and this supersedes all other language settings
+		analysis_request request;
+		request.given_filename  = "testing.java";
+        request.entry_filename  = "tester.aj";
+        request.given_url       = "";
+        request.option_filename = "tested.cs";
+        request.option_url      = "";
+        request.option_language = "c++";
+		
+		auto filename = analysis_filename(request);
+		assert(filename == "tested.cs");
+        assert(analysis_url(request) == "");
+        assert(analysis_language(request, filename) == "c++");
+        assert(code_analysis(request) == false);
+	}
 
     return 0;
 }
